@@ -1,0 +1,33 @@
+{{define "title"}}Books in Database{{end}}
+{{define "body"}}
+<div class="display-section">
+	{{range .}}
+	<div class="display">
+		<div class="text-display">
+			<h1>{{.Title}}</h1>
+			<p> {{.Author}}</p>
+		</div>
+		<div class="icon-display">
+			<button onclick="edit('{{.ID}}','{{.Title}}','{{.Author}}')">Edit</button>
+			<form method="POST" action="/books/{{.ID}}">
+				<input type="hidden" name="correct_method" value="DELETE">
+				<button type="submit">Delete</button>
+			</form>
+		</div>
+	</div>
+	{{end}}
+</div>
+<div class="form-section">
+	<form method="POST" class="edit-form">
+		<h2 class="form-title">Book Details</h2>
+		<input class="form-values test" name ="Title" type="text" placeholder="Title">
+		<input class="form-values texts" name="Author" type="text" placeholder="Information">
+		<input class ="edit-method" type="hidden" name="correct_method" value="POST">
+				
+		<div class="form-inputs">
+			<input class="form-button" onclick="formCancel()" type="button" value="Cancel">
+			<input class="form-button" type="submit" value="Submit">
+		</div>
+	</form>
+</div>
+{{end}}
